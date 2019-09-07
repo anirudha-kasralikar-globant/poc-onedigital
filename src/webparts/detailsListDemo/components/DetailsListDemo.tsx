@@ -68,15 +68,9 @@ export interface IDetailsListDocumentsExampleState {
 
 export interface IDocument {
   key: string;
-  name: string;
-  value: string;
-  iconName: string;
-  fileType: string;
-  modifiedBy: string;
-  dateModified: string;
-  dateModifiedValue: number;
-  fileSize: string;
-  fileSizeRaw: number;
+  title: string;
+  description: string;
+  category: string;
 }
 
 export default class DetailsListDemo extends React.Component<IDetailsListDemoProps, IDetailsListDocumentsExampleState> {
@@ -91,24 +85,24 @@ export default class DetailsListDemo extends React.Component<IDetailsListDemoPro
     const columns: IColumn[] = [
       {
         key: 'column1',
-        name: 'File Type',
-        className: classNames.fileIconCell,
-        iconClassName: classNames.fileIconHeaderIcon,
-        ariaLabel: 'Column operations for File type, Press to sort on File type',
-        iconName: 'Page',
-        isIconOnly: true,
-        fieldName: 'name',
-        minWidth: 16,
-        maxWidth: 16,
+        name: 'Title',
+        fieldName: 'title',
+        minWidth: 210,
+        maxWidth: 350,
+        isRowHeader: true,
+        isResizable: true,
+        isSorted: true,
+        isSortedDescending: false,
+        sortAscendingAriaLabel: 'Sorted A to Z',
+        sortDescendingAriaLabel: 'Sorted Z to A',
         onColumnClick: this._onColumnClick,
-        onRender: (item: IDocument) => {
-          return <img src={item.iconName} className={classNames.fileIconImg} alt={item.fileType + ' file icon'}/>;
-        }
+        data: 'string',
+        isPadded: true
       },
       {
         key: 'column2',
-        name: 'Name',
-        fieldName: 'name',
+        name: 'Description',
+        fieldName: 'description',
         minWidth: 210,
         maxWidth: 350,
         isRowHeader: true,
@@ -123,46 +117,19 @@ export default class DetailsListDemo extends React.Component<IDetailsListDemoPro
       },
       {
         key: 'column3',
-        name: 'Date Modified',
-        fieldName: 'dateModifiedValue',
-        minWidth: 70,
-        maxWidth: 90,
+        name: 'Category',
+        fieldName: 'category',
+        minWidth: 210,
+        maxWidth: 350,
+        isRowHeader: true,
         isResizable: true,
+        isSorted: true,
+        isSortedDescending: false,
+        sortAscendingAriaLabel: 'Sorted A to Z',
+        sortDescendingAriaLabel: 'Sorted Z to A',
         onColumnClick: this._onColumnClick,
-        data: 'number',
-        onRender: (item: IDocument) => {
-          return <span>{item.dateModified}</span>;
-        },
-        isPadded: true
-      },
-      {
-        key: 'column4',
-        name: 'Modified By',
-        fieldName: 'modifiedBy',
-        minWidth: 70,
-        maxWidth: 90,
-        isResizable: true,
-        isCollapsible: true,
         data: 'string',
-        onColumnClick: this._onColumnClick,
-        onRender: (item: IDocument) => {
-          return <span>{item.modifiedBy}</span>;
-        },
         isPadded: true
-      },
-      {
-        key: 'column5',
-        name: 'File Size',
-        fieldName: 'fileSizeRaw',
-        minWidth: 70,
-        maxWidth: 90,
-        isResizable: true,
-        isCollapsible: true,
-        data: 'number',
-        onColumnClick: this._onColumnClick,
-        onRender: (item: IDocument) => {
-          return <span>{item.fileSize}</span>;
-        }
       }
     ];
 
@@ -247,17 +214,17 @@ export default class DetailsListDemo extends React.Component<IDetailsListDemoPro
 
   private _onChangeCompactMode = (ev: React.MouseEvent<HTMLElement>, checked: boolean): void => {
     this.setState({ isCompactMode: checked });
-  };
+  }
 
   private _onChangeModalSelection = (ev: React.MouseEvent<HTMLElement>, checked: boolean): void => {
     this.setState({ isModalSelection: checked });
-  };
+  }
 
   private _onChangeText = (ev: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>, text: string): void => {
     this.setState({
-      items: text ? this._allItems.filter(i => i.name.toLowerCase().indexOf(text) > -1) : this._allItems
+      items: text ? this._allItems.filter(i => i.title.toLowerCase().indexOf(text) > -1) : this._allItems
     });
-  };
+  }
 
   private _onItemInvoked(item: any): void {
     alert(`Item invoked: ${item.name}`);
@@ -270,7 +237,7 @@ export default class DetailsListDemo extends React.Component<IDetailsListDemoPro
       case 0:
         return 'No items selected';
       case 1:
-        return '1 item selected: ' + (this._selection.getSelection()[0] as IDocument).name;
+        return '1 item selected: ' + (this._selection.getSelection()[0] as IDocument).title;
       default:
         return `${selectionCount} items selected`;
     }
@@ -294,7 +261,7 @@ export default class DetailsListDemo extends React.Component<IDetailsListDemoPro
       columns: newColumns,
       items: newItems
     });
-  };
+  }
 }
 
 function _copyAndSort<T>(items: T[], columnKey: string, isSortedDescending?: boolean): T[] {
@@ -304,28 +271,23 @@ function _copyAndSort<T>(items: T[], columnKey: string, isSortedDescending?: boo
 
 function _generateDocuments() {
   const items: IDocument[] = [];
-  for (let i = 0; i < 500; i++) {
-    const randomDate = _randomDate(new Date(2012, 0, 1), new Date());
-    const randomFileSize = _randomFileSize();
-    const randomFileType = _randomFileIcon();
-    let fileName = _lorem(2);
-    fileName = fileName.charAt(0).toUpperCase() + fileName.slice(1).concat(`.${randomFileType.docType}`);
-    let userName = _lorem(2);
-    userName = userName
+  for (let i = 0; i < 10; i++) {
+    let title = _lorem(2);
+    title = title
+      .split(' ')
+      .map((name: string) => name.charAt(0).toUpperCase() + name.slice(1))
+      .join(' ');
+
+    let description = _lorem(5);
+    description = description
       .split(' ')
       .map((name: string) => name.charAt(0).toUpperCase() + name.slice(1))
       .join(' ');
     items.push({
       key: i.toString(),
-      name: fileName,
-      value: fileName,
-      iconName: randomFileType.url,
-      fileType: randomFileType.docType,
-      modifiedBy: userName,
-      dateModified: randomDate.dateFormatted,
-      dateModifiedValue: randomDate.value,
-      fileSize: randomFileSize.value,
-      fileSizeRaw: randomFileSize.rawSize
+      title: title,
+      description: description,
+      category: _lorem(2),
     });
   }
   return items;
