@@ -9,12 +9,21 @@
           "manifest": "./src/webparts/listProjects/ListProjectsWebPart.manifest.json"
         }
       ]
+    },
+    "add-project-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/addProject/AddProjectWebPart.js",
+          "manifest": "./src/webparts/addProject/AddProjectWebPart.manifest.json"
+        }
+      ]
     }
   },
   "externals": {},
   "localizedResources": {
     "ListProjectsWebPartStrings": "lib/webparts/listProjects/loc/{locale}.js",
     "ControlStrings": "node_modules/@pnp/spfx-controls-react/lib/loc/{locale}.js",
-    "PropertyControlStrings": "node_modules/@pnp/spfx-property-controls/lib/loc/{locale}.js"
+    "PropertyControlStrings": "node_modules/@pnp/spfx-property-controls/lib/loc/{locale}.js",
+    "AddProjectWebPartStrings": "lib/webparts/addProject/loc/{locale}.js"
   }
 }

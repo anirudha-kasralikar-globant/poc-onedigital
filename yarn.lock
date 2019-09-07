@@ -128,6 +128,15 @@
     "@types/istanbul-reports" "^1.1.1"
     "@types/yargs" "^13.0.0"
 
+"@microsoft/api-extractor-model@7.1.3":
+  version "7.1.3"
+  resolved "https://registry.yarnpkg.com/@microsoft/api-extractor-model/-/api-extractor-model-7.1.3.tgz#f74d86e0aa838614daa2ffe1f743595061b85fed"
+  integrity sha512-DjagaoMFY1XyLjjo/x4lp7LoyjyMg4ntDY5+RE8g2zvt61m2dKm9CtxW0lxaQI4Xilw+n+Z4exjcGaQJeRcMyw==
+  dependencies:
+    "@microsoft/node-core-library" "3.13.0"
+    "@microsoft/tsdoc" "0.12.9"
+    "@types/node" "8.5.8"
+
 "@microsoft/api-extractor-model@7.3.4":
   version "7.3.4"
   resolved "https://registry.yarnpkg.com/@microsoft/api-extractor-model/-/api-extractor-model-7.3.4.tgz#5c3efee4022cab856516d0d447d4ee7dca5336c5"
@@ -136,6 +145,21 @@
     "@microsoft/node-core-library" "3.14.1"
     "@microsoft/tsdoc" "0.12.14"
     "@types/node" "8.5.8"
+
+"@microsoft/api-extractor@7.1.8":
+  version "7.1.8"
+  resolved "https://registry.yarnpkg.com/@microsoft/api-extractor/-/api-extractor-7.1.8.tgz#c5bd4bfef29d462920fcf29ac9838a7d7529afb7"
+  integrity sha512-7fcGbnOp7bmQe4p1b123K6gJ/qyaLWhufSt5OF3DMMK1JbmdfEGWf7AwyFFSS4QQzPvSxqs8Woehye4Ytf1uAA==
+  dependencies:
+    "@microsoft/api-extractor-model" "7.1.3"
+    "@microsoft/node-core-library" "3.13.0"
+    "@microsoft/ts-command-line" "4.2.5"
+    "@microsoft/tsdoc" "0.12.9"
+    colors "~1.2.1"
+    lodash "~4.17.5"
+    resolve "1.8.1"
+    source-map "~0.6.1"
+    typescript "~3.4.3"
 
 "@microsoft/api-extractor@7.3.11":
   version "7.3.11"
@@ -448,6 +472,18 @@
     tar "~4.4.1"
     wordwrap "~1.0.0"
     z-schema "~3.18.3"
+
+"@microsoft/rush-stack-compiler-2.9@0.7.16":
+  version "0.7.16"
+  resolved "https://registry.yarnpkg.com/@microsoft/rush-stack-compiler-2.9/-/rush-stack-compiler-2.9-0.7.16.tgz#57032058e51d18436e8a14892df1f2e6b5ee8b94"
+  integrity sha512-a3sHfyEYj1aPgd87DYDX1InyP7YMYGRg6w62Ems0sLM67gUni6JGqKwLjqPsfFe9pKoT9hXvv1ltkTvxqh629g==
+  dependencies:
+    "@microsoft/api-extractor" "7.1.8"
+    "@microsoft/node-core-library" "3.13.0"
+    "@types/node" "8.5.8"
+    tslint "~5.12.1"
+    tslint-microsoft-contrib "~5.2.1"
+    typescript "~2.9.2"
 
 "@microsoft/rush-stack-compiler-3.5@~0.1.x":
   version "0.1.9"
@@ -865,6 +901,16 @@
   resolved "https://registry.yarnpkg.com/@microsoft/teams-js/-/teams-js-1.4.2.tgz#41da47fbeacb44fc9338baec81fce47019e50117"
   integrity sha512-O10tpakpm+NyClJOW4eCaidlDI5sW9b5oRGQiUA0WqFG6GQt1HEz/KFsCN+ebaFgjstx+trZzYIuYdpK98XsMQ==
 
+"@microsoft/ts-command-line@4.2.5":
+  version "4.2.5"
+  resolved "https://registry.yarnpkg.com/@microsoft/ts-command-line/-/ts-command-line-4.2.5.tgz#ef5060c841e2e604c1e51c68f1b890a9b75ec6ff"
+  integrity sha512-QyTfbfpx6o+1cnjx5GubqKSRMDxBBMXABSa8wmqRa/A1K99FEBZfLIO6GmaY0s7rNYEchfR1VcVS/hV2VW+6hw==
+  dependencies:
+    "@types/argparse" "1.0.33"
+    "@types/node" "8.5.8"
+    argparse "~1.0.9"
+    colors "~1.2.1"
+
 "@microsoft/ts-command-line@4.2.6":
   version "4.2.6"
   resolved "https://registry.yarnpkg.com/@microsoft/ts-command-line/-/ts-command-line-4.2.6.tgz#c88a5d474f8c4f411598cdf17d23c1b6090e8fe9"
@@ -889,6 +935,11 @@
   version "0.12.14"
   resolved "https://registry.yarnpkg.com/@microsoft/tsdoc/-/tsdoc-0.12.14.tgz#0e0810a0a174e50e22dfe8edb30599840712f22d"
   integrity sha512-518yewjSga1jLdiLrcmpMFlaba5P+50b0TWNFUpC+SL9Yzf0kMi57qw+bMl+rQ08cGqH1vLx4eg9YFUbZXgZ0Q==
+
+"@microsoft/tsdoc@0.12.9":
+  version "0.12.9"
+  resolved "https://registry.yarnpkg.com/@microsoft/tsdoc/-/tsdoc-0.12.9.tgz#f92538bebf649b1b9d00bdd34a9c9971aef17d01"
+  integrity sha512-sDhulvuVk65eMppYOE6fr6mMI6RUqs53KUg9deYzNCBpP+2FhR0OFB5innEfdtSedk0LK+1Ppu6MxkfiNjS/Cw==
 
 "@mrmlnc/readdir-enhanced@^2.2.1":
   version "2.2.1"
@@ -10151,7 +10202,7 @@ office-ui-fabric-react@6.189.2:
     prop-types "^15.5.10"
     tslib "^1.7.1"
 
-office-ui-fabric-react@^6.181.1, office-ui-fabric-react@^6.182.0, office-ui-fabric-react@^6.203.2:
+office-ui-fabric-react@^6.181.1, office-ui-fabric-react@^6.203.2:
   version "6.203.2"
   resolved "https://registry.yarnpkg.com/office-ui-fabric-react/-/office-ui-fabric-react-6.203.2.tgz#80c25e8c72e08264635bf51f86b7a7b7b28ef95e"
   integrity sha512-4bh9OJZOqjpnGkoeFThyRRuIWzRtEuBdINNFh/7KeL3h3xJpI2qR+xcIfJHh7Hhsmz086g7njwJpgFrcZpnG9A==
@@ -13769,6 +13820,16 @@ typedarray@^0.0.6:
   version "0.0.6"
   resolved "https://registry.yarnpkg.com/typedarray/-/typedarray-0.0.6.tgz#867ac74e3864187b1d3d47d996a78ec5c8830777"
   integrity sha1-hnrHTjhkGHsdPUfZlqeOxciDB3c=
+
+typescript@~2.9.2:
+  version "2.9.2"
+  resolved "https://registry.yarnpkg.com/typescript/-/typescript-2.9.2.tgz#1cbf61d05d6b96269244eb6a3bce4bd914e0f00c"
+  integrity sha512-Gr4p6nFNaoufRIY4NMdpQRNmgxVIGMs4Fcu/ujdYk3nAZqk7supzBE9idmvfZIlH/Cuj//dvi+019qEue9lV0w==
+
+typescript@~3.4.3:
+  version "3.4.5"
+  resolved "https://registry.yarnpkg.com/typescript/-/typescript-3.4.5.tgz#2d2618d10bb566572b8d7aad5180d84257d70a99"
+  integrity sha512-YycBxUb49UUhdNMU5aJ7z5Ej2XGmaIBL0x34vZ82fn3hGvD+bgrMrVDpatgz2f7YxUMJxMkbWxJZeAvDxVe7Vw==
 
 typescript@~3.5.3, typescript@~3.5.x:
   version "3.5.3"

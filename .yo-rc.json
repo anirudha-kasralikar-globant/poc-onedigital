@@ -27,7 +27,7 @@
   "@microsoft/generator-sharepoint": {
     "environment": "spo",
     "framework": "react",
-    "isCreatingSolution": true,
+    "isCreatingSolution": false,
     "version": "1.9.1",
     "libraryName": "poc-onedigital",
     "libraryId": "b198a099-f0d7-4c6c-aead-b10d69d84b81",
