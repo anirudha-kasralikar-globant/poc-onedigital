@@ -2,8 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f9b06503-0f15-45a4-9d91-4f7f6017f167" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/webparts/settings.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/webparts/detailsListDemo/DetailsListDemoWebPart.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/webparts/detailsListDemo/DetailsListDemoWebPart.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/webparts/detailsListDemo/components/DetailsListDemo.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/webparts/detailsListDemo/components/DetailsListDemo.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/webparts/detailsListDemo/components/IDetailsListDemoProps.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/webparts/detailsListDemo/components/IDetailsListDemoProps.ts" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -61,7 +64,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1567766559027</updated>
-      <workItem from="1567766560443" duration="7884000" />
+      <workItem from="1567766560443" duration="10277000" />
     </task>
     <servers />
   </component>

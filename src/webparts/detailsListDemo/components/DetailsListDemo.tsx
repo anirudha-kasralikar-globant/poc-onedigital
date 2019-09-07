@@ -14,6 +14,8 @@ import {
 } from 'office-ui-fabric-react/lib/DetailsList';
 import {MarqueeSelection} from 'office-ui-fabric-react/lib/MarqueeSelection';
 import {mergeStyleSets} from 'office-ui-fabric-react/lib/Styling';
+import { Web, setup } from 'sp-pnp-js';
+import { proxyUrl, webRelativeUrl } from '../../settings';
 
 const classNames = mergeStyleSets({
   fileIconHeaderIcon: {
@@ -74,13 +76,21 @@ export interface IDocument {
 }
 
 export default class DetailsListDemo extends React.Component<IDetailsListDemoProps, IDetailsListDocumentsExampleState> {
-  private _selection: Selection;
-  private readonly _allItems: IDocument[];
+  private readonly _selection: Selection;
+  private _allItems: IDocument[];
+  public web: Web;
 
   constructor(props: IDetailsListDemoProps) {
     super(props);
 
-    this._allItems = _generateDocuments();
+    if (props.isLocal) {
+      this.web = new Web(`${proxyUrl}${webRelativeUrl}`);
+    } else {
+      setup({ spfxContext: props.context });
+      this.web = new Web(props.context.pageContext.web.absoluteUrl);
+    }
+
+    this._allItems = [];
 
     const columns: IColumn[] = [
       {
@@ -151,11 +161,15 @@ export default class DetailsListDemo extends React.Component<IDetailsListDemoPro
   }
 
   public componentDidMount(): void {
+    this._allItems = _generateDocuments(this.web);
 
+    this.setState({
+      items: this._allItems,
+    });
   }
 
   public render() {
-    const { columns, isCompactMode, items, selectionDetails, isModalSelection } = this.state;
+    const {columns, isCompactMode, items, selectionDetails, isModalSelection} = this.state;
 
     return (
       <Fabric>
@@ -176,7 +190,7 @@ export default class DetailsListDemo extends React.Component<IDetailsListDemoPro
             offText="Normal"
             styles={controlStyles}
           />
-          <TextField label="Filter by name:" onChange={this._onChangeText} styles={controlStyles} />
+          <TextField label="Filter by name:" onChange={this._onChangeText} styles={controlStyles}/>
         </div>
         <div className={classNames.selectionDetails}>{selectionDetails}</div>
         <MarqueeSelection selection={this._selection}>
@@ -213,18 +227,18 @@ export default class DetailsListDemo extends React.Component<IDetailsListDemoPro
   }
 
   private _onChangeCompactMode = (ev: React.MouseEvent<HTMLElement>, checked: boolean): void => {
-    this.setState({ isCompactMode: checked });
-  }
+    this.setState({isCompactMode: checked});
+  };
 
   private _onChangeModalSelection = (ev: React.MouseEvent<HTMLElement>, checked: boolean): void => {
-    this.setState({ isModalSelection: checked });
-  }
+    this.setState({isModalSelection: checked});
+  };
 
   private _onChangeText = (ev: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>, text: string): void => {
     this.setState({
       items: text ? this._allItems.filter(i => i.title.toLowerCase().indexOf(text) > -1) : this._allItems
     });
-  }
+  };
 
   private _onItemInvoked(item: any): void {
     alert(`Item invoked: ${item.name}`);
@@ -244,7 +258,7 @@ export default class DetailsListDemo extends React.Component<IDetailsListDemoPro
   }
 
   private _onColumnClick = (ev: React.MouseEvent<HTMLElement>, column: IColumn): void => {
-    const { columns, items } = this.state;
+    const {columns, items} = this.state;
     const newColumns: IColumn[] = columns.slice();
     const currColumn: IColumn = newColumns.filter(currCol => column.key === currCol.key)[0];
     newColumns.forEach((newCol: IColumn) => {
@@ -261,7 +275,7 @@ export default class DetailsListDemo extends React.Component<IDetailsListDemoPro
       columns: newColumns,
       items: newItems
     });
-  }
+  };
 }
 
 function _copyAndSort<T>(items: T[], columnKey: string, isSortedDescending?: boolean): T[] {
@@ -269,70 +283,21 @@ function _copyAndSort<T>(items: T[], columnKey: string, isSortedDescending?: boo
   return items.slice(0).sort((a: T, b: T) => ((isSortedDescending ? a[key] < b[key] : a[key] > b[key]) ? 1 : -1));
 }
 
-function _generateDocuments() {
+function _generateDocuments(web: any) {
   const items: IDocument[] = [];
-  for (let i = 0; i < 10; i++) {
-    let title = _lorem(2);
-    title = title
-      .split(' ')
-      .map((name: string) => name.charAt(0).toUpperCase() + name.slice(1))
-      .join(' ');
 
-    let description = _lorem(5);
-    description = description
-      .split(' ')
-      .map((name: string) => name.charAt(0).toUpperCase() + name.slice(1))
-      .join(' ');
-    items.push({
-      key: i.toString(),
-      title: title,
-      description: description,
-      category: _lorem(2),
-    });
-  }
+  web.lists.getByTitle("MyTodos").items.get().then((todoItems: any[]) => {
+    for (var todoItem of todoItems) {
+      items.push({
+        key: todoItem.Id,
+        title: todoItem.Title,
+        description: todoItem.Description,
+        category: todoItem.CategoryId,
+      });
+    }
+  });
+
   return items;
-}
-
-function _randomDate(start: Date, end: Date): { value: number; dateFormatted: string } {
-  const date: Date = new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
-  return {
-    value: date.valueOf(),
-    dateFormatted: date.toLocaleDateString()
-  };
-}
-
-const FILE_ICONS: { name: string }[] = [
-  { name: 'accdb' },
-  { name: 'csv' },
-  { name: 'docx' },
-  { name: 'dotx' },
-  { name: 'mpt' },
-  { name: 'odt' },
-  { name: 'one' },
-  { name: 'onepkg' },
-  { name: 'onetoc' },
-  { name: 'pptx' },
-  { name: 'pub' },
-  { name: 'vsdx' },
-  { name: 'xls' },
-  { name: 'xlsx' },
-  { name: 'xsn' }
-];
-
-function _randomFileIcon(): { docType: string; url: string } {
-  const docType: string = FILE_ICONS[Math.floor(Math.random() * FILE_ICONS.length)].name;
-  return {
-    docType,
-    url: `https://static2.sharepointonline.com/files/fabric/assets/brand-icons/document/svg/${docType}_16x1.svg`
-  };
-}
-
-function _randomFileSize(): { value: string; rawSize: number } {
-  const fileSize: number = Math.floor(Math.random() * 100) + 30;
-  return {
-    value: `${fileSize} KB`,
-    rawSize: fileSize
-  };
 }
 
 const LOREM_IPSUM = (
@@ -342,6 +307,7 @@ const LOREM_IPSUM = (
   'eu fugiat nulla pariatur excepteur sint occaecat cupidatat non proident sunt in culpa qui officia deserunt '
 ).split(' ');
 let loremIndex = 0;
+
 function _lorem(wordCount: number): string {
   const startIndex = loremIndex + wordCount > LOREM_IPSUM.length ? 0 : loremIndex;
   loremIndex = startIndex + wordCount;

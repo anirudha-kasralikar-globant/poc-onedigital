@@ -10,6 +10,9 @@ import {
 import * as strings from 'DetailsListDemoWebPartStrings';
 import DetailsListDemo from './components/DetailsListDemo';
 import { IDetailsListDemoProps } from './components/IDetailsListDemoProps';
+import {
+  Environment, EnvironmentType
+} from '@microsoft/sp-core-library';
 
 export interface IDetailsListDemoWebPartProps {
   description: string;
@@ -21,7 +24,9 @@ export default class DetailsListDemoWebPart extends BaseClientSideWebPart<IDetai
     const element: React.ReactElement<IDetailsListDemoProps > = React.createElement(
       DetailsListDemo,
       {
-        description: this.properties.description
+        description: this.properties.description,
+        context: this.context,
+        isLocal: Environment.type === EnvironmentType.Local
       }
     );
 
