@@ -17,6 +17,14 @@
           "manifest": "./src/webparts/addProject/AddProjectWebPart.manifest.json"
         }
       ]
+    },
+    "details-list-demo-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/detailsListDemo/DetailsListDemoWebPart.js",
+          "manifest": "./src/webparts/detailsListDemo/DetailsListDemoWebPart.manifest.json"
+        }
+      ]
     }
   },
   "externals": {},
@@ -24,6 +32,7 @@
     "ListProjectsWebPartStrings": "lib/webparts/listProjects/loc/{locale}.js",
     "ControlStrings": "node_modules/@pnp/spfx-controls-react/lib/loc/{locale}.js",
     "PropertyControlStrings": "node_modules/@pnp/spfx-property-controls/lib/loc/{locale}.js",
-    "AddProjectWebPartStrings": "lib/webparts/addProject/loc/{locale}.js"
+    "AddProjectWebPartStrings": "lib/webparts/addProject/loc/{locale}.js",
+    "DetailsListDemoWebPartStrings": "lib/webparts/detailsListDemo/loc/{locale}.js"
   }
 }
