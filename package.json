@@ -38,7 +38,7 @@
     "@types/webpack-env": "1.13.1",
     "@uifabric/fluent-theme": "^0.16.9",
     "core-util-is": "^1.0.2",
-    "jquery": "^3.4.1",
+    "jquery": "^3.5.0",
     "office-ui-fabric-react": "6.189.2",
     "react": "16.8.5",
     "react-dom": "16.8.5",
